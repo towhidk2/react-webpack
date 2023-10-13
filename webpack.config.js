@@ -6,8 +6,15 @@ module.exports = {
     entry: path.join(__dirname, 'src', 'index.js'),
 
     output: {
-        path: path.join(__dirname, 'dist'),
-        filename: 'bundle.js'
+        filename: '[name].bundle.js',
+        path: path.join(__dirname, 'dist')
+    },
+
+    optimization: {
+        splitChunks: {
+          // include all types of chunks
+          chunks: 'all',
+        },
     },
 
     devServer: {
@@ -31,7 +38,22 @@ module.exports = {
                         presets: ['@babel/preset-env', '@babel/preset-react']
                     }
                 }
-            }
+            },
+
+            {
+                test: /\.css$/i,
+                use: ["style-loader", "css-loader"],
+            },
+
+            {
+                test: /\.(png|jp(e*)g|svg|gif)$/,
+                use: ['file-loader'],
+            },
+
+            {
+                test: /\.svg$/,
+                use: ['@svgr/webpack'],
+            },
         ]
     }
 }
