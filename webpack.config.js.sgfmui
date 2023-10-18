@@ -9,7 +9,7 @@ module.exports = {
 
     output: {
         filename: 'bundle.[contenthash].js', 
-        path: path.join(__dirname, 'dist'),
+        path: path.join(__dirname, 'build'),
         clean: true
     },
 
@@ -40,9 +40,7 @@ module.exports = {
 
             {
                 test: /\.(js|jsx)$/,
-                exclude: [
-                    '/node_modules/'
-                ],
+                exclude: [ path.join(__dirname, 'node_modules') ],
                 use: {
                     loader: 'babel-loader',
                     options: {
